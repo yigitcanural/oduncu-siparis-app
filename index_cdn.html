@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oduncu Sipariş</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-slate-50">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // İkonlar (Emoji)
+        const Truck = () => <span className="text-2xl">🚚</span>
+        const User = () => <span>👤</span>
+        const Phone = () => <span>📞</span>
+        const CreditCard = () => <span>💳</span>
+        const Calendar = () => <span>📅</span>
+        const Package = () => <span>📦</span>
+        const MapPin = () => <span>📍</span>
+        const Share2 = () => <span>📲</span>
+        const Clipboard = () => <span>📋</span>
+
+        function App() {
+            const [formData, setFormData] = useState({
+                name: '',
+                phone: '',
+                paymentType: 'Nakit',
+                paymentStatus: 'Ödenmedi',
+                deliveryDate: '',
+                orderDetails: '',
+                address: ''
+            })
+
+            const handleChange = (e) => {
+                const { name, value } = e.target
+                setFormData(prev => ({ ...prev, [name]: value }))
+            }
+
+            const generateText = () => {
+                return `*Sipariş Bilgileri*\n\n` +
+                    `👤 *İsim:* ${formData.name}\n` +
+                    `📞 *Tel:* ${formData.phone}\n` +
+                    `💰 *Ödeme:* ${formData.paymentType} - ${formData.paymentStatus}\n` +
+                    `📅 *Tarih:* ${formData.deliveryDate}\n` +
+                    `🪵 *Sipariş:* ${formData.orderDetails}\n` +
+                    `📍 *Adres:* ${formData.address}`
+            }
+
+            const copyToClipboard = () => {
+                navigator.clipboard.writeText(generateText())
+                alert('Metin kopyalandı!')
+            }
+
+            const shareOnWhatsApp = () => {
+                const text = encodeURIComponent(generateText())
+                window.open(`https://wa.me/?text=${text}`, '_blank')
+            }
+
+            return (
+                <div className="min-h-screen p-4 font-sans flex items-center justify-center">
+                    <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div className="bg-emerald-600 p-6 text-white text-center">
+                            <div className="flex justify-center mb-2">
+                                <Truck />
+                            </div>
+                            <h1 className="text-2xl font-bold">Oduncu Sipariş</h1>
+                            <p className="text-emerald-100 text-sm">Hızlı Sipariş Formu</p>
+                        </div>
+
+                        <div className="p-6 space-y-4">
+                            {/* Form Fields */}
+                            <div className="space-y-2">
+                                <label className="flex items-center text-sm font-medium text-gray-700 gap-2">
+                                    <User /> İsim Soyisim
+                                </label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                                    placeholder="Müşteri Adı"
+                                />
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="flex items-center text-sm font-medium text-gray-700 gap-2">
+                                    <Phone /> Telefon
+                                </label>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                                    placeholder="0555 555 55 55"
+                                />
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <label className="flex items-center text-sm font-medium text-gray-700 gap-2">
+                                        <CreditCard /> Ödeme Tipi
+                                    </label>
+                                    <select
+                                        name="paymentType"
+                                        value={formData.paymentType}
+                                        onChange={handleChange}
+                                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white"
+                                    >
+                                        <option value="Nakit">Nakit</option>
+                                        <option value="Kredi Kartı">Kredi Kartı</option>
+                                        <option value="Havale/EFT">Havale/EFT</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="flex items-center text-sm font-medium text-gray-700">
+                                        Durum
+                                    </label>
+                                    <select
+                                        name="paymentStatus"
+                                        value={formData.paymentStatus}
+                                        onChange={handleChange}
+                                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white"
+                                    >
+                                        <option value="Ödenmedi">Ödenmedi</option>
+                                        <option value="Ödendi">Ödendi</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="flex items-center text-sm font-medium text-gray-700 gap-2">
+                                    <Calendar /> Ne Zaman Gidecek?
+                                </label>
+                                <input
+                                    type="text"
+                                    name="deliveryDate"
+                                    value={formData.deliveryDate}
+                                    onChange={handleChange}
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none transition"
+                                    placeholder="Yarın öğleden sonra"
+                                />
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="flex items-center text-sm font-medium text-gray-700 gap-2">
+                                    <Package /> Sipariş Detayı
+                                </label>
+                                <textarea
+                                    name="orderDetails"
+                                    value={formData.orderDetails}
+                                    onChange={handleChange}
+                                    rows="3"
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none transition"
+                                    placeholder="1 Ton Meşe Odunu..."
+                                ></textarea>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="flex items-center text-sm font-medium text-gray-700 gap-2">
+                                    <MapPin /> Adres
+                                </label>
+                                <textarea
+                                    name="address"
+                                    value={formData.address}
+                                    onChange={handleChange}
+                                    rows="3"
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none transition"
+                                    placeholder="Açık adres..."
+                                ></textarea>
+                            </div>
+
+                            {/* Actions */}
+                            <div className="pt-4 space-y-3">
+                                <button
+                                    onClick={shareOnWhatsApp}
+                                    className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center transition shadow-md active:scale-95"
+                                >
+                                    <Share2 /> <span className="ml-2">WhatsApp'a Gönder</span>
+                                </button>
+                                
+                                <button
+                                    onClick={copyToClipboard}
+                                    className="w-full bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center transition shadow-md active:scale-95"
+                                >
+                                    <Clipboard /> <span className="ml-2">Metni Kopyala</span>
+                                </button>
+                            </div>
+
+                            {/* Preview */}
+                            <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-600">
+                                <h3 className="font-semibold mb-2 text-gray-800">Önizleme:</h3>
+                                <pre className="whitespace-pre-wrap font-mono text-xs">{generateText()}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
