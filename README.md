@@ -50,8 +50,15 @@ Android uygulaması olarak da kullanılabilir. APK dosyası [Releases](../../rel
 
 ## 📸 Ekran Görüntüsü
 
-<!-- Uygulama ekran görüntüsünü buraya ekleyin -->
-<!-- ![Oduncu Sipariş](screenshot.png) -->
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/530699cb-1e01-42d7-a5dc-e6c994073995" width="300"/>
+</p>
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/f28db191-7938-46d7-ad16-4d12ba24e429" width="300"/>
+</p>
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/b1bd7aef-68e4-490f-9fd1-bb8cc000a024" width="300"/>
+</p>
 
 ---
 
