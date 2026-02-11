@@ -4,7 +4,7 @@ Bir arkadaşımın oduncu dükkanı için geliştirdiğim basit ve pratik bir si
 
 > **Amaç:** Küçük işletmelerin sipariş takibini dijitalleştirmek — kalem kâğıt yerine tek tıkla WhatsApp’a göndermek. Sipariş detayları şirket grubuna düzenli ve eksiksiz şekilde iletildiğinde, takip kolaylaşır, detaylar kaybolmaz ve tüm ekip aynı bilgiye anlık erişim sağlar.
 
-Uygulama, sektörün doğası gereği bilinçli olarak sade tutulmuştur — tüm çalışanların rahatlıkla kullanabileceği, öğrenme gerektirmeyen bir arayüz hedeflenmiştir. Daha kapsamlı ihtiyaçlar için aşağıdaki özellikler eklenebilir:
+**Uygulama, sektörün doğası gereği bilinçli olarak sade tutulmuştur — tüm çalışanların rahatlıkla kullanabileceği, öğrenme gerektirmeyen bir arayüz hedeflenmiştir. Daha kapsamlı ihtiyaçlar için aşağıdaki özellikler eklenebilir:**
 
 - 📊 **Google Sheets entegrasyonu** — Her sipariş otomatik olarak tabloya kaydedilsin
 - 🔄 **n8n ile otomasyon** — Sipariş oluşturulduğunda bildirim, stok takibi vb.
